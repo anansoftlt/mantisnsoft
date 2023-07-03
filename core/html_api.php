@@ -1134,6 +1134,76 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 	echo '</form>' . "\n";
 }
 
+
+/**
+ * Print Change Target Version to: button
+ *
+ * @param BugData $p_bug A valid bug object.
+ * @return void
+ */
+function html_button_bug_change_target_version_to( BugData $p_bug ) {
+	$t_fields = config_get( 'bug_view_page_fields' );
+	$t_fields = columns_filter_disabled( $t_fields );
+	$t_show_versions = version_should_show_product_version( $p_bug->project_id );
+	$t_show_target_version = $t_show_versions && in_array( 'target_version', $t_fields ) && access_has_bug_level( config_get( 'roadmap_update_threshold' ), $p_bug->id );
+	$t_current_access = access_get_project_level( $p_bug->project_id );
+	if( $t_show_target_version&& access_compare_level( $t_current_access, access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug->id ) )) {
+
+			echo '<form method="post" action="bug_update.php" class="form-inline">';
+			echo form_security_field( 'bug_update' );
+			echo '<input type="hidden" name="last_updated" value="' . $p_bug->last_updated . '" />';
+			echo '<input type="hidden" name="action_type" value="' . BUG_UPDATE_TYPE_NORMAL . '" />';
+
+			$t_button_text = lang_get( 'bug_target_version_to_button' );
+			echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $t_button_text . '" />';
+
+			echo ' <select name="target_version" class="input-sm">';
+
+			# space at beginning of line is important
+			print_version_option_list( $p_bug->target_version, $p_bug->project_id, 0 );
+
+			echo '</select>';
+			$t_bug_id = string_attribute( $p_bug->id );
+			echo '<input type="hidden" name="bug_id" value="' . $t_bug_id . '" />' . "\n";
+			echo '</form>' . "\n";
+	}
+}
+
+/**
+ * Print Change Fixed In Version to: button
+ *
+ * @param BugData $p_bug A valid bug object.
+ * @return void
+ */
+function html_button_bug_change_fixed_in_version_version_to( BugData $p_bug ) {
+	$t_fields = config_get( 'bug_view_page_fields' );
+	$t_fields = columns_filter_disabled( $t_fields );
+	$t_show_versions = version_should_show_product_version( $p_bug->project_id );
+	$t_show_fixed_in_version = $t_show_versions && in_array( 'fixed_in_version', $t_fields ) && access_has_bug_level( config_get( 'roadmap_update_threshold' ), $p_bug->id );
+	$t_current_access = access_get_project_level( $p_bug->project_id );
+	if( $t_show_fixed_in_version && access_compare_level( $t_current_access, access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug->id ) )) {
+			echo '<form method="post" action="bug_update.php" class="form-inline">';
+			echo form_security_field( 'bug_update' );
+			echo '<input type="hidden" name="last_updated" value="' . $p_bug->last_updated . '" />';
+			echo '<input type="hidden" name="action_type" value="' . BUG_UPDATE_TYPE_NORMAL . '" />';
+
+			$t_button_text = lang_get( 'bug_fixed_in_version_to_button' );
+			echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $t_button_text . '" />';
+
+			echo ' <select name="fixed_in_version" class="input-sm">';
+
+			# space at beginning of line is important
+			print_version_option_list( $p_bug->fixed_in_version, $p_bug->project_id, null );
+
+			echo '</select>';
+			$t_bug_id = string_attribute( $p_bug->id );
+			echo '<input type="hidden" name="bug_id" value="' . $t_bug_id . '" />' . "\n";
+			echo '</form>' . "\n";
+	}
+}
+
+
+
 /**
  * Print a button to move the given bug to a different project
  * @param integer $p_bug_id A valid bug identifier.
@@ -1283,6 +1353,15 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 		echo '<div class="pull-left padding-right-8">';
 		html_button_bug_change_status( $t_bug );
 		echo '</div>';
+
+		$t_target_version = config_get( 'set_bug_target_version_threshold' );
+		$t_fixed_in_version = config_get( 'set_bug_fixed_in_version_threshold' );
+	if( access_has_bug_level( $t_target_version, $p_bug_id ) ) {
+		# Change target version button/dropdown 
+		echo '<div class="pull-left padding-right-8">';
+		html_button_bug_change_target_version_to( $t_bug );
+		echo '</div>';
+	}		 
 	}
 
 	# MONITOR/UNMONITOR button
@@ -1333,6 +1412,15 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 	echo '<div class="pull-left padding-right-2">';
 	html_button_bug_delete( $p_bug_id );
 	echo '</div>';
+
+		$t_bug = bug_get( $p_bug_id, true );
+        $is_test = strpos($t_bug->summary, 'IŠTESTUOTI') !== false; 
+
+        if( !current_user_is_anonymous() && !$is_test ) {
+		echo '<div>';
+                html_button( 'bug_report_page_test.php', 'To The TEST Lab!', array( 'm_id' => $p_bug_id ) );
+		echo '</div>';
+	}
 
 	helper_call_custom_function( 'print_bug_view_page_custom_buttons', array( $p_bug_id ) );
 

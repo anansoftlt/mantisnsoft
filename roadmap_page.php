@@ -277,9 +277,13 @@ foreach( $t_project_ids as $t_project_id ) {
 
 		$t_version = $t_version_row['version'];
 
-		$t_query = 'SELECT sbt.*, {bug_relationship}.source_bug_id, dbt.target_version as parent_version FROM {bug} sbt
+		$t_query = 'SELECT sbt.*, {bug_relationship}.source_bug_id, dbt.target_version as parent_version, jt.value as jira_id, st.value as programuotojo_ivertinta,
+                                project.fnk_task_total(sbt.id) as praleista_valandu, sbt.status AS statusas
+		FROM {bug} sbt
+					LEFT JOIN mantis_custom_field_string_table jt ON (bug_id = id and field_id = 8)
 					LEFT JOIN {bug_relationship} ON sbt.id={bug_relationship}.destination_bug_id AND {bug_relationship}.relationship_type=2
 					LEFT JOIN {bug} dbt ON dbt.id={bug_relationship}.source_bug_id
+					LEFT JOIN mantis_custom_field_string_table st ON (st.bug_id = sbt.id and st.field_id = 18)
 					WHERE sbt.project_id=' . db_param() . ' AND sbt.target_version=' . db_param() . ' ORDER BY sbt.status ASC, sbt.last_updated DESC';
 
 		$t_description = $t_version_row['description'];
@@ -292,7 +296,34 @@ foreach( $t_project_ids as $t_project_id ) {
 		$t_issue_parents = array();
 		$t_issue_handlers = array();
 
+						$viso_ivertinta_nepadarytu = 0;
+                        $viso_praleista_nepadarytu = 0;
+                        $viso_ivertinta_padarytu = 0;
+                        $viso_praleista_padarytu = 0;
+                        $n_neivertintu = 0;
+
 		while( $t_row = db_fetch_array( $t_result ) ) {
+								$t_issue_ivertinta = $t_row['programuotojo_ivertinta'];
+                                $t_issue_praleista = $t_row['praleista_valandu'];
+                                $t_issue_statusas = $t_row['statusas'];
+
+                                # ivertintu valandu skaitliuko sumavimas
+                                # @neatlikti darbai:
+                                if ($t_row['statusas'] <= 50) {
+                                    $viso_ivertinta_nepadarytu += $t_issue_ivertinta;
+                                    $viso_praleista_nepadarytu += $t_issue_praleista;
+                                }
+
+                                # @atlikti darbai:
+                                else {
+                                    $viso_ivertinta_padarytu += $t_issue_ivertinta;
+                                    $viso_praleista_padarytu += $t_issue_praleista;
+                                }
+
+                                if ($t_issue_ivertinta <= 0) {
+                                    $n_neivertintu++;
+                                }
+
 			# hide private bugs if user doesn't have access to view them.
 			if( !$t_can_view_private && ( $t_row['view_state'] == VS_PRIVATE ) ) {
 				continue;
@@ -420,10 +451,35 @@ foreach( $t_project_ids as $t_project_id ) {
 
 			$t_issues_found = true;
 		}
-
+				if ( $t_issues_planned > 0 ) {
+				echo '<br />';
+				//echo "</div>";
+	                            // @mantas: dovydui sukurtas funkcionalumas, sukurta npointui (project_id = 1)
+	                            if ($t_project_id == 1) {
+	                                $ent = '<br />';
+	                                echo '<div class="widget-toolbox padding-8 clearfix ValanduSamata">';
+	                                echo 'Visų įvertintos: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' . ($viso_ivertinta_padarytu + $viso_ivertinta_nepadarytu) . $ent;
+	                                echo 'Padarytų įvertintos: &nbsp&nbsp' .   $viso_ivertinta_padarytu . $ent;
+	                                echo 'Padarytų praleistos: &nbsp&nbsp' .   $viso_praleista_padarytu . $ent;
+	                                echo 'Nepadarytų įvertintos: ' . $viso_ivertinta_nepadarytu . $ent;
+	                                echo 'Nepadarytų praleistos: ' . $viso_praleista_nepadarytu . $ent;
+	                     
+	                                if ($n_neivertintu > 0) {
+	                                    echo 'Neįvertintų kiekis:&nbsp&nbsp&nbsp <span style="color:red">' .   $n_neivertintu . '</span>' . $ent;
+	                                }
+					echo '</div>';
+	                            }
+	                            echo '<br />';
+				//echo sprintf( lang_get( 'resolved_progress' ), $t_issues_resolved, $t_issues_planned, $t_progress );
+				//echo '<br />';
+	                           // echo '</tt>';
+			}
 		if( $t_version_header_printed ) {
 			print_version_footer( $t_version_row,  $t_issues_resolved, $t_issues_planned, $t_progress);
+	
 		}
+		            //TODO: isvedimai:
+
 	}
 }
 
@@ -437,5 +493,6 @@ if( !$t_issues_found ) {
 	echo '<br />';
 	echo '<p class="lead">' . lang_get( $t_string ) . '</p>';
 }
+
 echo '</div>';
 layout_page_end();

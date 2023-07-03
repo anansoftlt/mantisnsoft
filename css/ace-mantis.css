@@ -645,4 +645,13 @@ input.typeahead.scrollable ~ .tt-menu {
     }
 
 }
-
+/*0028760*/
+@media (min-width: 765px){
+.navbar-buttons.navbar-header.navbar-collapse.collapse {
+    display: block!important;
+    height: auto!important;
+    padding-bottom: 0;
+    overflow: visible!important;
+}
+}
+/*0028760*/

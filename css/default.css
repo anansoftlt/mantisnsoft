@@ -1,3 +1,7 @@
+* {
+       padding: 0;
+       margin: 0;
+   }
 @media print {
 	#view-issue-page .bugnote .btn { display: none; }
 	#view-issue-page .bugnote .btn-sm { display: none; }
@@ -104,4 +108,18 @@ td.print-overdue    { font-weight: bold; }
 
 .error-details .code {
 	font-family: monospace;
+}
+table.width100		{ width: 100%; border: solid 1px #999; }
+.toggly {
+	display: none;
+}
+.jedit_spent {
+	display:inline;
+}
+.jeditablas {
+	display:inline;
+}
+.ValanduSamata {
+	position: relative;
+	bottom: -20px;
 }

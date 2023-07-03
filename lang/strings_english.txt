@@ -319,7 +319,7 @@ $s_email_notification_title_for_action_relationship_child_resolved = 'The RELATE
 $s_email_notification_title_for_action_relationship_child_closed = 'The RELATED issue %1$s has been CLOSED.';
 $s_email_notification_title_for_action_related_issue_deleted = 'The RELATED issue %1$s has been DELETED.';
 $s_email_notification_title_for_action_monitor = 'Issue %1$s is now monitored by user %2$s.';
-
+$s_email_notification_title_for_status_bug_tested = 'The following issue has been TESTED.';
 $s_email_reporter = 'Reported By';
 $s_email_handler = 'Assigned To';
 $s_email_project = 'Project';
@@ -480,11 +480,15 @@ $s_feedback_bug_title = 'Request Feedback on Issue';
 $s_acknowledged_bug_title = 'Acknowledge Issue';
 $s_confirmed_bug_title = 'Confirm Issue';
 $s_assigned_bug_title = 'Assign Issue';
+$s_tested_bug_title = 'Set Tested';
+$s_to_be_tested_bug_title = 'To The Test';
 $s_new_bug_button = 'New Issue';
 $s_feedback_bug_button = 'Request Feedback';
 $s_acknowledged_bug_button = 'Acknowledge Issue';
 $s_confirmed_bug_button = 'Confirm Issue';
 $s_assigned_bug_button = 'Assign Issue';
+$s_tested_bug_button = 'Set Tested';
+$s_to_be_tested_bug_button = 'To The Test';
 
 # bug_close.php
 $s_bug_close_msg = 'Issue has been closed...';
@@ -1760,7 +1764,30 @@ $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'This issue has been updated by anot
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'You have reached the allowed activity limit of %d events within the last %d seconds; your action has been blocked to avoid spam, please try again later.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Field "%1$s" must be shorter or equal to %2$d characters long.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already being used. Please go back and select another one.';
+$s_cf_klaidos_tipas = 'Klaidos tipas';
+$s_cf_kaltininkas = 'Kaltininkas';
+$s_cf_klaidos_priezastis = 'Klaidos priežastis';
+$s_cf_skirta_valandu = 'Programuotojo įvertintos valandos';
+$s_cf_susije_moduliai = 'Atkreipti dėmesį į';
+$s_cf_valandos = 'Valandos';
+$s_cf_pazadeta_valandu = 'Pažadėta valandų klientui';
+$s_cf_aptikta_sistemoje = 'Aptikta sistemoje';
+$s_cf_kas_moketojas_npoint = 'Mokėtojas (nPoint)';
+$s_cf_klaidos_reiksme = 'Klaidos reikšmė';
+$s_cf_kada_apmokestinta = 'Kada apmokestina';
+$s_cf_planuojama_baigti = 'Planuojama baigti';
+$s_cf_galima_praleisti_val_max = 'Galima praleisti valandų max.';
 
+$s_cf_keitimas_sekmingas = 'Keitimas sėkmingas';
+$s_cf_keitimo_kategorija = 'Keitimo kategorija';
+$s_cf_diegimo_terminas = 'Diegimo terminas';
+$s_cf_keitimo_rezultatyvumas = 'Keitimo rezultatyvumas';
+$s_cf_sprint = 'Sprintas';
+# Ticketex
+$s_cf_jira_tick_id = 'Jira tick ID';
+$s_cf_blt_salis = 'Ticketex šalis';
+$s_cf_tipas = 'Užduoties tipas';
+$s_cf_blt_projektas = 'Ticketex projektas';
 # dropzone.js - placeholders format is defined by the library
 $s_dropzone_default_message = 'Drop files here to upload (or click)';
 $s_dropzone_fallback_message = 'Your browser does not support drag\'n\'drop file uploads.';
