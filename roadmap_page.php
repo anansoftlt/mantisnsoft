@@ -259,6 +259,8 @@ foreach( $t_project_ids as $t_project_id ) {
 
 	$t_project_header_printed = false;
 
+	$t_view_bug_threshold = config_get( 'view_bug_threshold', null, $t_user_id, $t_project_id );
+
 	foreach( $t_version_rows as $t_version_row ) {
 		if( $t_version_row['released'] == 1 ) {
 			continue;
@@ -324,17 +326,10 @@ foreach( $t_project_ids as $t_project_id ) {
                                     $n_neivertintu++;
                                 }
 
-			# hide private bugs if user doesn't have access to view them.
-			if( !$t_can_view_private && ( $t_row['view_state'] == VS_PRIVATE ) ) {
-				continue;
-			}
-
 			bug_cache_database_result( $t_row );
 
-			# check limit_Reporter (Issue #4770)
-			# reporters can view just issues they reported
-			if( ON === $t_limit_reporters && $t_user_access_level_is_reporter &&
-				 !bug_is_user_reporter( $t_row['id'], $t_user_id )) {
+			# verify the user can view this issue
+			if( !access_has_bug_level( $t_view_bug_threshold, $t_row['id'] ) ) {
 				continue;
 			}
 
@@ -390,7 +385,7 @@ foreach( $t_project_ids as $t_project_id ) {
 
 			echo '<div class="space-4"></div>';
 			echo '<div class="col-md-7 col-xs-12 no-padding">';
-			echo '<div class="progress progress-striped" data-percent="' . $t_progress . '%" >';
+			echo '<div class="progress progress-large progress-striped" data-percent="' . $t_progress . '%" >';
 			echo '<div style="width:' . $t_progress . '%;" class="progress-bar progress-bar-success"></div>';
 			echo '</div></div>';
 			echo '<div class="clearfix"></div>';
