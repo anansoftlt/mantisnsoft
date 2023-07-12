@@ -75,6 +75,8 @@ require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
 use Mantis\Exceptions\ClientException;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception as phpmailerException;
 
 /** @global PHPMailer $g_phpMailer reusable PHPMailer object */
 $g_phpMailer = null;
@@ -2117,8 +2119,8 @@ function email_shutdown_function() {
 
 	log_event( LOG_EMAIL_VERBOSE, $t_msg );
 
-	email_send_all();
 	if( $g_email_shutdown_processing ) {
+		email_send_all();
 	}
 }
 
