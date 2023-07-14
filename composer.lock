@@ -240,7 +240,7 @@
                     "homepage": "https://github.com/Nyholm"
                 },
                 {
-                    "name": "Márk Sági-Kazár",
+                    "name": "M�rk S�gi-Kaz�r",
                     "email": "mark.sagikazar@gmail.com",
                     "homepage": "https://github.com/sagikazarmark"
                 },
@@ -424,7 +424,7 @@
                     "homepage": "https://github.com/Nyholm"
                 },
                 {
-                    "name": "Márk Sági-Kazár",
+                    "name": "M�rk S�gi-Kaz�r",
                     "email": "mark.sagikazar@gmail.com",
                     "homepage": "https://github.com/sagikazarmark"
                 },
@@ -697,10 +697,10 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
+                 "psr-4": {
                     "PHPMailer\\PHPMailer\\": "src/"
-                }
-            },
+		}
+             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "LGPL-2.1-only"
