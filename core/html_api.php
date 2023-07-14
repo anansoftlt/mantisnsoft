@@ -992,8 +992,6 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
 }
 
 /**
-
-/**
  * Print Change Target Version to: button
  *
  * @param BugData $p_bug A valid bug object.
@@ -1060,27 +1058,7 @@ function html_button_bug_change_fixed_in_version_version_to( BugData $p_bug ) {
 	}
 }
 
-
-
-
-		$t_target_version = config_get( 'set_bug_target_version_threshold' );
-		$t_fixed_in_version = config_get( 'set_bug_fixed_in_version_threshold' );
-	if( access_has_bug_level( $t_target_version, $p_bug_id ) ) {
-		# Change target version button/dropdown 
-		echo '<div class="pull-left padding-right-8">';
-		html_button_bug_change_target_version_to( $t_bug );
-		echo '</div>';
-	}		 
-
-		$t_bug = bug_get( $p_bug_id, true );
-        $is_test = strpos($t_bug->summary, 'IŠTESTUOTI') !== false; 
-
-        if( !current_user_is_anonymous() && !$is_test ) {
-		echo '<div>';
-                html_button( 'bug_report_page_test.php', 'To The TEST Lab!', array( 'm_id' => $p_bug_id ) );
-		echo '</div>';
-	}
- * Get the foreground color CSS class for the given status, user and project.
+ /* Get the foreground color CSS class for the given status, user and project.
  * @see html_get_status_css_bg() for background color
  *
  * @param integer $p_status  An enumeration value.
@@ -1394,4 +1372,3 @@ class TableFieldsItem {
 		$this->header_attr_id = $p_header_id;
 	}
 }
-

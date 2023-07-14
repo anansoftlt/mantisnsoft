@@ -74,9 +74,9 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
+use Mantis\Exceptions\ClientException;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as phpmailerException;
-use Mantis\Exceptions\ClientException;
 
 /** @global PHPMailer $g_phpMailer reusable PHPMailer object */
 $g_phpMailer = null;

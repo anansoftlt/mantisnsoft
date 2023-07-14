@@ -1774,7 +1774,7 @@ $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'This issue has been updated by anot
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'You have reached the allowed activity limit of %d events within the last %d seconds; your action has been blocked to avoid spam, please try again later.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Field "%1$s" must be shorter or equal to %2$d characters long.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already being used. Please go back and select another one.';
-<<<<<<< HEAD
+$MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'The file specified in $g_log_destination "%s" is not writable.';
 $s_cf_klaidos_tipas = 'Klaidos tipas';
 $s_cf_kaltininkas = 'Kaltininkas';
 $s_cf_klaidos_priezastis = 'Klaidos priežastis';
@@ -1788,10 +1788,6 @@ $s_cf_klaidos_reiksme = 'Klaidos reikšmė';
 $s_cf_kada_apmokestinta = 'Kada apmokestina';
 $s_cf_planuojama_baigti = 'Planuojama baigti';
 $s_cf_galima_praleisti_val_max = 'Galima praleisti valandų max.';
-=======
-$MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'The file specified in $g_log_destination "%s" is not writable.';
->>>>>>> nsoft_2.21
-
 $s_cf_keitimas_sekmingas = 'Keitimas sėkmingas';
 $s_cf_keitimo_kategorija = 'Keitimo kategorija';
 $s_cf_diegimo_terminas = 'Diegimo terminas';

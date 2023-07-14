@@ -1753,30 +1753,6 @@ $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Field "%1$s" must be shorter or equal to 
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already being used. Please go back and select another one.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'The file specified in $g_log_destination "%s" is not writable.';
 
-$s_cf_klaidos_tipas = 'Klaidos tipas';
-$s_cf_kaltininkas = 'Kaltininkas';
-$s_cf_klaidos_priezastis = 'Klaidos priežastis';
-$s_cf_skirta_valandu = 'Programuotojo įvertintos valandos';
-$s_cf_susije_moduliai = 'Atkreipti dėmesį į';
-$s_cf_valandos = 'Valandos';
-$s_cf_pazadeta_valandu = 'Pažadėta valandų klientui';
-$s_cf_aptikta_sistemoje = 'Aptikta sistemoje';
-$s_cf_kas_moketojas_npoint = 'Mokėtojas (nPoint)';
-$s_cf_klaidos_reiksme = 'Klaidos reik�mė';
-$s_cf_kada_apmokestinta = 'Kada apmokestina';
-$s_cf_planuojama_baigti = 'Planuojama baigti';
-$s_cf_galima_praleisti_val_max = 'Galima praleisti valandų max.';
-
-$s_cf_keitimas_sekmingas = 'Keitimas sėkmingas';
-$s_cf_keitimo_kategorija = 'Keitimo kategorija';
-$s_cf_diegimo_terminas = 'Diegimo terminas';
-$s_cf_keitimo_rezultatyvumas = 'Keitimo rezultatyvumas';
-$s_cf_sprint = 'Sprintas';
-# Ticketex
-$s_cf_jira_tick_id = 'Jira tick ID';
-$s_cf_blt_salis = 'Ticketex �alis';
-$s_cf_tipas = 'Užduoties tipas';
-$s_cf_blt_projektas = 'Ticketex projektas';
 # dropzone.js - placeholders format is defined by the library
 $s_dropzone_default_message = 'Attach files by dragging & dropping, selecting or pasting them.';
 $s_dropzone_fallback_message = 'Your browser does not support drag\'n\'drop file uploads.';
